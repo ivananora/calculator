@@ -24,6 +24,7 @@ let btn0 = document.getElementById('zero');
 let dotBtn = document.querySelector('.decimal');
 let equalsBtn = document.querySelector('.equals');
 
+
 function operatorChosen(operatorPressed) {
     if(firstOperand != '') {
         if(secondOperand == '') {
@@ -99,27 +100,68 @@ function operate() {
     }
 };
 
+function prevent2OperatorsDisplay() {
+    let curNumHTML = currentNum.innerHTML;
+    let splitCurNum = curNumHTML.split('');
+    if (!splitCurNum.includes('+')) {
+        if (!splitCurNum.includes('-')) {
+            if (!splitCurNum.includes('*')) {
+                if (!splitCurNum.includes('/')) {
+                    currentNum.textContent += operator;
+                }
+            }
+        } 
+    }
+}
+
+function enableBtns() {
+    addBtn.disabled = false;
+    subtractBtn.disabled = false;
+    multiplyBtn.disabled = false;
+    divideBtn.disabled = false;
+};
+
+function disableBtns() {
+    addBtn.disabled = true;
+    subtractBtn.disabled = true;
+    multiplyBtn.disabled = true;
+    divideBtn.disabled = true;
+}
 
 addBtn.addEventListener('click', () => {
     operatorChosen('+');
-    currentNum.textContent += operator;
+    prevent2OperatorsDisplay();
+    disableBtns();
 });
 
 subtractBtn.addEventListener('click', () => {
     operatorChosen('-');
-    currentNum.textContent += operator;
+    prevent2OperatorsDisplay();
+    disableBtns();
 });
 
 multiplyBtn.addEventListener('click', () => {
     operatorChosen('*');
-    currentNum.textContent += operator;
+    prevent2OperatorsDisplay();
+    disableBtns();
 });
 
 divideBtn.addEventListener('click', () => {
     operatorChosen('/');
-    currentNum.textContent += operator;
+    prevent2OperatorsDisplay();
+    disableBtns();
 });
 
+// function inputNum(numbr) {
+//     if(isOperatorChosen == false) {
+//         firstOperand += `${numbr}`;
+//         currentNum.textContent += `${numbr}`;
+//     }
+//     if(isOperatorChosen == true) {
+//         secondOperand += `${numbr}`;
+//         currentNum.textContent += `${numbr}`;
+//     }
+// }
 
 btn1.addEventListener('click', () => {
     if(isOperatorChosen == false) {
@@ -129,7 +171,6 @@ btn1.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '1';
         currentNum.textContent += '1';
-        operate();
     }
 });
 
@@ -141,7 +182,6 @@ btn2.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '2';
         currentNum.textContent += '2';
-        operate();
     }
 });
 
@@ -153,7 +193,6 @@ btn3.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '3';
         currentNum.textContent += '3';
-        operate();
     }
 });
 
@@ -165,7 +204,6 @@ btn4.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '4';
         currentNum.textContent += '4';
-        operate();
     }
 });
 
@@ -177,7 +215,6 @@ btn5.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '5';
         currentNum.textContent += '5';
-        operate();
     }
 });
 
@@ -189,7 +226,6 @@ btn6.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '6';
         currentNum.textContent += '6';
-        operate();
     }
 });
 
@@ -201,7 +237,6 @@ btn7.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '7';
         currentNum.textContent += '7';
-        operate();
     }
 });
 
@@ -213,7 +248,6 @@ btn8.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '8';
         currentNum.textContent += '8';
-        operate();
     }
 });
 
@@ -225,7 +259,6 @@ btn9.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '9';
         currentNum.textContent += '9';
-        operate();
     }
 });
 
@@ -237,29 +270,34 @@ btn0.addEventListener('click', () => {
     if(isOperatorChosen == true) {
         secondOperand += '0';
         currentNum.textContent += '0';
-        operate();
     }
 });
 
 dotBtn.addEventListener('click', () => {
     if(isOperatorChosen == false) {
-        firstOperand += '.';
-        currentNum.textContent += '.';
+        let firstOperandArr = firstOperand.split('');
+        if (!firstOperandArr.includes('.')) {
+            firstOperand += '.';
+            currentNum.textContent += '.';
+        }
     }
     if(isOperatorChosen == true) {
-        secondOperand += '.';
-        currentNum.textContent += '.';
+        let firstOperandArr = firstOperand.split('');
+        if (!firstOperandArr.includes('.')) {
+            firstOperand += '.';
+            currentNum.textContent += '.';
+        }
     }
-})
+});
 
 equalsBtn.addEventListener('click', () => {
     operate();
-    currentNum.style.opacity = '50%';
-    previousNum.style.opacity = '100%';
+    enableBtns();
     currentNum.textContent = result;
 });
 
 clearBtn.addEventListener('click', () => {
+    enableBtns();
     firstOperand = '';
     operator = '';
     secondOperand = '';
@@ -267,6 +305,4 @@ clearBtn.addEventListener('click', () => {
     isOperatorChosen = false;
     currentNum.textContent = '';
     previousNum.textContent = '';
-    previousNum.style.opacity = '50%';
-    currentNum.style.opacity = '100%';
 });
