@@ -1,7 +1,7 @@
 let firstOperand = '';
 let operator = '';
 let secondOperand = '';
-let result = '';
+let result = 0;
 let isOperatorChosen = false;
 
 let previousNum = document.getElementById('output');
@@ -69,25 +69,41 @@ function operate() {
         let firstOpFloat = parseFloat(firstOperand);
         let secondOpFloat = parseFloat(secondOperand);
         result = firstOpFloat + secondOpFloat;
-        previousNum.textContent = result;
+        if(result%1 !== 0) {
+            previousNum.textContent = result.toFixed(2);
+        } else {
+            previousNum.textContent = result;
+        }
         return result;
     } else if (operator === '-') {
         let firstOpFloat = parseFloat(firstOperand);
         let secondOpFloat = parseFloat(secondOperand);
         result = firstOpFloat - secondOpFloat;
-        previousNum.textContent = result;
+        if(result%1 !== 0) {
+            previousNum.textContent = result.toFixed(2);
+        } else {
+            previousNum.textContent = result;
+        }
         return result;
     } else if (operator === '*') {
         let firstOpFloat = parseFloat(firstOperand);
         let secondOpFloat = parseFloat(secondOperand);
         result = firstOpFloat * secondOpFloat;
-        previousNum.textContent = result;
+        if(result%1 !== 0) {
+            previousNum.textContent = result.toFixed(2);
+        } else {
+            previousNum.textContent = result;
+        }
         return result;
     } else if (operator === '/') {
         let firstOpFloat = parseFloat(firstOperand);
         let secondOpFloat = parseFloat(secondOperand);
         result = firstOpFloat / secondOpFloat;
-        previousNum.textContent = result;
+        if(result%1 !== 0) {
+            previousNum.textContent = result.toFixed(2);
+        } else {
+            previousNum.textContent = result;
+        }
         return result;
     }
 };
@@ -184,7 +200,11 @@ dotBtn.addEventListener('click', () => {
 equalsBtn.addEventListener('click', () => {
     operate();
     enableBtns();
-    currentNum.textContent = result;
+    if(result%1 !== 0) {
+        currentNum.textContent = result.toFixed(2);
+    } else {
+        currentNum.textContent = result;
+    }
 });
 
 clearBtn.addEventListener('click', () => {
@@ -192,7 +212,7 @@ clearBtn.addEventListener('click', () => {
     firstOperand = '';
     operator = '';
     secondOperand = '';
-    result = '';
+    result = 0;
     isOperatorChosen = false;
     currentNum.textContent = '';
     previousNum.textContent = '';
