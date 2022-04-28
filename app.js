@@ -24,7 +24,6 @@ let btn0 = document.getElementById('zero');
 let dotBtn = document.querySelector('.decimal');
 let equalsBtn = document.querySelector('.equals');
 
-
 function operatorChosen(operatorPressed) {
     if(firstOperand != '') {
         if(secondOperand == '') {
@@ -43,8 +42,7 @@ function operatorChosen(operatorPressed) {
                     break;
             }
             isOperatorChosen = true;
-        }
-        if(secondOperand != '') {
+        } else if(secondOperand != '') {
             switch(operatorPressed) {
                 case '+':
                     operator = '+';
@@ -73,25 +71,19 @@ function operate() {
         result = firstOpFloat + secondOpFloat;
         previousNum.textContent = result;
         return result;
-    }
-
-    if (operator === '-') {
+    } else if (operator === '-') {
         let firstOpFloat = parseFloat(firstOperand);
         let secondOpFloat = parseFloat(secondOperand);
         result = firstOpFloat - secondOpFloat;
         previousNum.textContent = result;
         return result;
-    }
-
-    if (operator === '*') {
+    } else if (operator === '*') {
         let firstOpFloat = parseFloat(firstOperand);
         let secondOpFloat = parseFloat(secondOperand);
         result = firstOpFloat * secondOpFloat;
         previousNum.textContent = result;
         return result;
-    }
-
-    if (operator === '/') {
+    } else if (operator === '/') {
         let firstOpFloat = parseFloat(firstOperand);
         let secondOpFloat = parseFloat(secondOperand);
         result = firstOpFloat / secondOpFloat;
@@ -112,7 +104,7 @@ function prevent2OperatorsDisplay() {
             }
         } 
     }
-}
+};
 
 function enableBtns() {
     addBtn.disabled = false;
@@ -126,7 +118,7 @@ function disableBtns() {
     subtractBtn.disabled = true;
     multiplyBtn.disabled = true;
     divideBtn.disabled = true;
-}
+};
 
 addBtn.addEventListener('click', () => {
     operatorChosen('+');
@@ -152,139 +144,38 @@ divideBtn.addEventListener('click', () => {
     disableBtns();
 });
 
-// function inputNum(numbr) {
-//     if(isOperatorChosen == false) {
-//         firstOperand += `${numbr}`;
-//         currentNum.textContent += `${numbr}`;
-//     }
-//     if(isOperatorChosen == true) {
-//         secondOperand += `${numbr}`;
-//         currentNum.textContent += `${numbr}`;
-//     }
-// }
+function inputNum(numb) {
+    if(isOperatorChosen == false && firstOperand.length <= 5) {
+        firstOperand += `${numb}`;
+        currentNum.textContent += `${numb}`;
+    } else if(isOperatorChosen == true && secondOperand.length <= 5) {
+        secondOperand += `${numb}`;
+        currentNum.textContent += `${numb}`;
+    }
+};
 
-btn1.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '1';
-        currentNum.textContent += '1';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '1';
-        currentNum.textContent += '1';
-    }
-});
-
-btn2.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '2';
-        currentNum.textContent += '2';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '2';
-        currentNum.textContent += '2';
-    }
-});
-
-btn3.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '3';
-        currentNum.textContent += '3';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '3';
-        currentNum.textContent += '3';
-    }
-});
-
-btn4.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '4';
-        currentNum.textContent += '4';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '4';
-        currentNum.textContent += '4';
-    }
-});
-
-btn5.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '5';
-        currentNum.textContent += '5';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '5';
-        currentNum.textContent += '5';
-    }
-});
-
-btn6.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '6';
-        currentNum.textContent += '6';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '6';
-        currentNum.textContent += '6';
-    }
-});
-
-btn7.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '7';
-        currentNum.textContent += '7';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '7';
-        currentNum.textContent += '7';
-    }
-});
-
-btn8.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '8';
-        currentNum.textContent += '8';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '8';
-        currentNum.textContent += '8';
-    }
-});
-
-btn9.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '9';
-        currentNum.textContent += '9';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '9';
-        currentNum.textContent += '9';
-    }
-});
-
-btn0.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
-        firstOperand += '0';
-        currentNum.textContent += '0';
-    }
-    if(isOperatorChosen == true) {
-        secondOperand += '0';
-        currentNum.textContent += '0';
-    }
-});
+btn1.addEventListener('click', () => inputNum(1));
+btn2.addEventListener('click', () => inputNum(2));
+btn3.addEventListener('click', () => inputNum(3));
+btn4.addEventListener('click', () => inputNum(4));
+btn5.addEventListener('click', () => inputNum(5));
+btn6.addEventListener('click', () => inputNum(6));
+btn7.addEventListener('click', () => inputNum(7));
+btn8.addEventListener('click', () => inputNum(8));
+btn9.addEventListener('click', () => inputNum(9));
+btn0.addEventListener('click', () => inputNum(0));
 
 dotBtn.addEventListener('click', () => {
-    if(isOperatorChosen == false) {
+    if(isOperatorChosen == false && firstOperand.length <= 5) {
         let firstOperandArr = firstOperand.split('');
         if (!firstOperandArr.includes('.')) {
             firstOperand += '.';
             currentNum.textContent += '.';
         }
-    }
-    if(isOperatorChosen == true) {
-        let firstOperandArr = firstOperand.split('');
-        if (!firstOperandArr.includes('.')) {
-            firstOperand += '.';
+    } else if(isOperatorChosen == true && secondOperand.length <= 5) {
+        let secondOperandArr = secondOperand.split('');
+        if (!secondOperandArr.includes('.')) {
+            secondOperand += '.';
             currentNum.textContent += '.';
         }
     }
